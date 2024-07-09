@@ -1,0 +1,58 @@
+<div class="content" >
+  <header>
+    <h2>Relatorio</h2>
+    <p>POR ASM</p>
+    <form nz-form>
+      <nz-range-picker [(ngModel)]="data"></nz-range-picker>
+      <nz-select [(ngModel)]="tipo" name="Tipo" [nzDropdownMatchSelectWidth]="false">
+        <nz-option
+          *ngFor="let item of selectEstadoAsm"
+          [nzLabel]="item.label"
+          [nzValue]="item.value"
+          [nzDisabled]="item.disabled">
+        </nz-option>
+      </nz-select>
+
+      <button nz-button nzType="primary" (click)="fazerRelatorio()">Fazer Relatorio</button>
+      <div class="space"></div>
+      <button nz-button nzType="dashed" (click)="exportCsv()">
+        <span nz-icon nzType="export" nzTheme="outline"></span>
+        Exportar
+      </button>
+    </form>
+  </header>
+
+  <nz-table
+  #filterTable
+  [nzData]="listOfData"
+  nzPaginationPosition="both"
+  nzTableLayout="fixed"
+  nzShowSizeChanger
+>
+  <thead>
+    <tr>
+      <th
+        *ngFor="let column of listOfColumns"
+        [nzSortOrder]="column.sortOrder"
+        [nzSortFn]="column.sortFn"
+        [nzSortDirections]="column.sortDirections"
+        [nzFilterMultiple]="column.filterMultiple"
+        [nzFilters]="column.listOfFilter"
+        [nzFilterFn]="column.filterFn"
+      >
+        {{ column.name }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of filterTable.data">
+      <td>{{ data.id }}</td>
+      <td>{{ data.pecas.length }}</td>
+      <td>{{ data.destino }}</td>
+      <td>{{ data.usuario }}</td>
+      <td>{{ data.data | date: 'dd/MM/yyyy' }}</td>
+      <td><button nz-button nzType="primary" nzSize="small" nzBlock [routerLink]="['/controle/asm/',data.id]" routerLinkActive="router-link-active" ><span nz-icon nzType="eye" nzTheme="outline"></span>VER</button></td>
+    </tr>
+  </tbody>
+</nz-table>
+</div>

@@ -1,0 +1,15 @@
+.content {
+  padding: 3rem;
+  header {
+    text-transform: uppercase;
+    * {
+      margin: 0;
+    }
+
+    form{
+      display: flex;margin-top: 1rem;
+      gap: .5rem;
+    }
+
+  }
+}

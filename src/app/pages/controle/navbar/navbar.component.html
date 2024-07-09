@@ -1,0 +1,40 @@
+<nav nz-menu nzMode="horizontal">
+  <ul>
+    <li nz-menu-item [routerLink]="['/controle']" routerLinkActive="router-link-active"  >
+      <span nz-icon nzType="home"></span>
+      Inicio
+    </li>
+    <li nz-submenu nzTitle="Relatorios" nzIcon="control">
+      <ul>
+        <li nz-menu-item nzIcon="control" [routerLink]="['relatorios/por-peca']" routerLinkActive="router-link-active">
+          <span nz-icon nzType="tool" nzTheme="outline"></span>
+          Por Peça
+        </li>
+        <li nz-menu-item [routerLink]="['relatorios/por-asm']" routerLinkActive="router-link-active">
+          <span nz-icon nzType="truck" nzTheme="outline"></span>
+          Por ASM
+        </li>
+      </ul>
+    </li>
+    <li nz-menu-item  >
+      <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+        <input type="text" [(ngModel)]="numeroAsm" nz-input placeholder="Nº da Asm" (keydown.enter)="rotaDaAsm()"/>
+      </nz-input-group>
+      <ng-template #suffixIconButton>
+        <button nz-button nzType="primary" nzSearch (click)="rotaDaAsm()" ><span nz-icon nzType="search"></span></button>
+      </ng-template>
+    </li>
+  </ul>
+  <div class="user">
+    <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+      <nz-avatar nzIcon="user" [nzShape]="'square'"></nz-avatar>
+    </a>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <ul nz-menu>
+        <li nz-menu-item [routerLink]="['/controle/user']" routerLinkActive="router-link-active">Usuario</li>
+        <li nz-menu-divider></li>
+        <li nz-menu-item nzDanger>Sair</li>
+      </ul>
+    </nz-dropdown-menu>
+  </div>
+</nav>

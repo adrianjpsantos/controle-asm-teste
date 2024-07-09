@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+body,html{
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #ECECEC;
+}
+
+.vh-100{
+  height: 100vh;
+}
+
+.center-items{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.space{
+  flex-grow: 1;
+}
+
+.gap-1
+{
+  gap: 1rem;
+}

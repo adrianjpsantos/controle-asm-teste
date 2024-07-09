@@ -1,0 +1,17 @@
+nz-list-item{
+  display: flex;
+  gap: 1rem;
+  padding: .5rem;
+  nz-list-item-meta{
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.usuario-acoes
+{
+  display: flex;
+  gap: .5rem;
+  justify-content: center;
+}
+

@@ -1,0 +1,198 @@
+<div class="page">
+  <nz-card [nzBorderless]="true">
+    <header>
+      <h2>Nova ASM</h2>
+    </header>
+    <content>
+      <form nz-form [formGroup]="novaAsmGroup">
+        <nz-form-item class="header" nzAlign="bottom">
+          <nz-form-item>
+            <nz-form-control>
+              <nz-form-label>Destino</nz-form-label>
+              <nz-select
+                formControlName="destino"
+                [nzDropdownMatchSelectWidth]="false"
+              >
+                <nz-option
+                  *ngFor="let item of listaModulos"
+                  [nzLabel]="item.label"
+                  [nzValue]="item.value"
+                  [nzDisabled]="item.disabled"
+                >
+                </nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control>
+              <label nz-checkbox formControlName="periodoFechado"
+                >PERIODO FECHADO</label
+              ></nz-form-control
+            ></nz-form-item
+          >
+          <nz-form-item>
+            <nz-form-control>
+              <label nz-checkbox formControlName="temNotaFiscal"
+                >Tem Nota Fiscal</label
+              ></nz-form-control
+            ></nz-form-item
+          >
+          <nz-form-item>
+            <nz-form-control>
+              <label nz-checkbox formControlName="foraDeEstoque"
+                >Fora de Estoque</label
+              ></nz-form-control
+            ></nz-form-item
+          >
+        </nz-form-item>
+        <nz-form-item hidden>
+          <nz-form-control>
+            <nz-form-label>Data</nz-form-label>
+            <input
+              nz-input
+              formControlName="data"
+              type="datetime"
+              nzPlaceHolder="Destino"
+            />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nzFlex class="gap-1">
+          <nz-form-item [hidden]="!temNotaFiscal()">
+            <nz-form-control>
+              <nz-form-label>N° Nota Fiscal</nz-form-label>
+
+              <input
+                nz-input
+                formControlName="notaFiscal"
+                nzPlaceHolder="123456"
+              />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item [hidden]="!temNotaFiscal()">
+            <nz-form-control>
+              <nz-form-label>Fornecedor</nz-form-label>
+              <nz-select
+                formControlName="fornecedor"
+                [nzDropdownMatchSelectWidth]="false"
+              >
+                <nz-option
+                  *ngFor="let item of listaFornecedor"
+                  [nzLabel]="item.label"
+                  [nzValue]="item.value"
+                  [nzDisabled]="item.disabled"
+                >
+                </nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </nz-form-item>
+
+        <nz-card nzTitle="Adicionar Peça">
+          <nz-form-item class="header">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label>Codigo Item</nz-form-label>
+
+                <input
+                  nz-input
+                  formControlName="codPeca"
+                  nzPlaceHolder="0000000"
+                  [nzAutocomplete]="auto"
+                  (ngModelChange)="selectedCodPeca($event)"
+                />
+                <nz-autocomplete #auto>
+                  @for (item of pecasInfos; track $index) {
+                  <nz-auto-option [nzValue]="item.codigo">{{
+                    item.codigo + " - " + item.descricao
+                  }}</nz-auto-option>
+                  }
+                </nz-autocomplete>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control>
+                <nz-form-label>Descrição Item</nz-form-label>
+
+                <input
+                  nz-input
+                  formControlName="desPeca"
+                  nzPlaceHolder="0000000"
+                />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control class="qtdpeca">
+                <nz-form-label>Quantidade Item</nz-form-label>
+                <nz-input-number
+                  formControlName="qtdPeca"
+                  nzPlaceHolder="0000000"
+                  [nzMin]="1"
+                  [nzStep]="1"
+                ></nz-input-number>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item nzFlex nzAlign="bottom">
+              <nz-form-control>
+                <button
+                  nz-button
+                  nzBlock
+                  nzType="primary"
+                  (click)="adicionarPeca()"
+                  [disabled]="disabledAddButton()"
+                >
+                  <span nz-icon nzType="plus" nzTheme="outline"></span>Adicionar
+                </button>
+              </nz-form-control>
+            </nz-form-item>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-table
+              #items
+              [nzData]="listaPecas"
+              nzSize="small"
+              nzTableLayout="fixed"
+            >
+              <thead>
+                <tr>
+                  <th>Cod. da peça</th>
+                  <th>Descrição</th>
+                  <th>Quantidade</th>
+                  <th nzWidth="10%">Ação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of items.data">
+                  <td>{{ data.codigo }}</td>
+                  <td>{{ data.descricao }}</td>
+                  <td>{{ data.quantidade }}</td>
+                  <td>
+                    <button
+                      nz-button
+                      nzDanger
+                      nzOkDanger="true"
+                      nz-popconfirm
+                      nzPopconfirmTitle="Quer mesmo remover {{
+                        data.descricao
+                      }}?"
+                      nzPopconfirmPlacement="left"
+                      (nzOnConfirm)="removerPeca(data.codigo)"
+                    >
+                      Remover
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </nz-form-item>
+        </nz-card>
+
+        <nz-form-item style="margin-top: 1rem">
+          <nz-form-control>
+            <button nz-button nzType="primary">CRIAR</button>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </content>
+  </nz-card>
+</div>

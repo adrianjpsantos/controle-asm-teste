@@ -1,0 +1,35 @@
+<div class="content" >
+  <h2>Ultimas Autorização de saida de materiais</h2>
+  <nz-table
+  #lastAsm
+  [nzData]="listOfData"
+  nzPaginationPosition="both"
+  nzTableLayout="fixed"
+  nzShowSizeChanger
+>
+  <thead>
+    <tr>
+      <th
+        *ngFor="let column of listOfColumns"
+        [nzSortOrder]="column.sortOrder"
+        [nzSortFn]="column.sortFn"
+        [nzSortDirections]="column.sortDirections"
+        [nzFilterMultiple]="column.filterMultiple"
+        [nzFilters]="column.listOfFilter"
+        [nzFilterFn]="column.filterFn"
+      >
+        {{ column.name }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of lastAsm.data">
+      <td>{{ data.id }}</td>
+      <td>{{ data.pecas.length }}</td>
+      <td>{{ data.destino }}</td>
+      <td>{{ data.usuario }}</td>
+      <td>{{ data.data }}</td>
+    </tr>
+  </tbody>
+</nz-table>
+</div>

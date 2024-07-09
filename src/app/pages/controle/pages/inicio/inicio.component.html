@@ -1,0 +1,35 @@
+<div class="content">
+  <header>
+    <div class="welcome">
+      <h3>Bem Vindo(a),</h3>
+      <h1>Adrian Santos</h1>
+    </div>
+    <div class="space"></div>
+    <div class="actions">
+      <button class="nova-asm" nzType="primary" nz-button [routerLink]="['asm-nova']" routerLinkActive="router-link-active" ><span nz-icon nzType="plus-square" nzTheme="outline"></span>ASM</button>
+    </div>
+  </header>
+  <content>
+    <nz-row [nzGutter]="16">
+      <nz-col [nzSpan]="12">
+        <nz-card>
+          <nz-statistic
+            [nzTitle]="'Total Autorização de Saida de Material'"
+            [nzValue]="totalAsm"
+          ></nz-statistic>
+        </nz-card>
+      </nz-col>
+      <nz-col [nzSpan]="12">
+        <nz-card>
+          <nz-statistic
+            [nzTitle]="'Autorização de Saida de Material Faturadas'"
+            [nzValue]="porcentosAsmFaturadas.toFixed(2)"
+            [nzSuffix]="'%'"
+            [nzValueStyle]="porcentoCor()"
+          ></nz-statistic>
+        </nz-card>
+      </nz-col>
+    </nz-row>
+  </content>
+  <app-last-asm></app-last-asm>
+</div>

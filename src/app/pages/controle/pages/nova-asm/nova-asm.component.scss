@@ -1,0 +1,23 @@
+.page {
+  padding: 3rem;
+
+  form {
+    .header {
+      display: flex;
+      gap: 1rem;
+    }
+  }
+}
+.nf-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.qtdpeca {
+  nz-form-label {
+    display:block;
+  }
+  nz-input-number{
+    width: 120px;
+  }
+}

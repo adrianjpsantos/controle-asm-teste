@@ -1,0 +1,30 @@
+<div class="content">
+  <header>
+    <h2>Todos os usuarios</h2>
+    <nz-input-group>
+      <nz-select
+        [(ngModel)]="modulo"
+        (ngModelChange)="filtrarModulos()"
+        [nzDropdownMatchSelectWidth]="false"
+      >
+        <nz-option
+          *ngFor="let item of listaModulos"
+          [nzLabel]="item.label"
+          [nzValue]="item.value"
+          [nzDisabled]="item.disabled"
+        >
+        </nz-option>
+      </nz-select>
+    </nz-input-group>
+  </header>
+  <nz-list nzItemLayout="horizontal">
+    @if (listaUsuariosFiltrada.length > 0) { @for (usuario of
+    listaUsuariosFiltrada; track $index) {
+    <app-item-lista-usuarios [usuario]="usuario"></app-item-lista-usuarios>
+    @if ($index < listaUsuariosFiltrada.length - 1) {
+    <nz-divider></nz-divider>
+    } } } @else{
+    <nz-empty nzNotFoundContent="Usuarios não encontrados"></nz-empty>
+    }
+  </nz-list>
+</div>

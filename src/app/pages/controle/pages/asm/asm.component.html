@@ -1,0 +1,54 @@
+<div class="content">
+  <nz-card class="acoes">
+    <button nz-button nzType="dashed" (click)="printSection()">
+      <span nz-icon nzType="printer" nzTheme="outline"></span>Imprimir
+    </button>
+    <button nz-button nzType="primary">Editar</button>
+  </nz-card>
+
+  <nz-card class="card" id="print-asm">
+    <header>
+      <div class="row-grid">
+        <h2>Autorização de saida de materiais</h2>
+        <div class="space"></div>
+        <div class="date-grid">
+          <span class="label">DATA</span>
+          <span>___________________________</span>
+        </div>
+      </div>
+
+      <div class="row-grid">
+        <span class="label">ORIGEM</span>
+        <span>BASE</span>
+      </div>
+      <div class="row-grid">
+        <span class="label">DESTINO</span>
+        <span>MOD2</span>
+      </div>
+      <div class="row-grid">
+        <span class="label">AUTORIZADO POR</span>
+        <span>|</span>
+        <span class="label">ASSINATURA</span>
+        <span>|</span>
+      </div>
+      <div class="row-grid">
+        <span class="label">RETIRADO POR</span>
+        <span>|</span>
+        <span class="label">ASSINATURA</span>
+        <span>|</span>
+      </div>
+    </header>
+    <div class="content-list">
+      <div class="header">
+        <span class="codigo">Codigo</span>
+        <span class="quantidade">Qtd.</span>
+        <span class="descricao">Descrição</span>
+      </div>
+      <div class="row-list">
+        <span class="codigo">4564521.000</span>
+        <span class="quantidade">01</span>
+        <span class="descricao">CABO CATERPILAR</span>
+      </div>
+    </div>
+  </nz-card>
+</div>

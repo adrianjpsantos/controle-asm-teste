@@ -1,0 +1,18 @@
+.content {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3rem;
+  header{
+    display: flex;
+  }
+}
+
+.actions {
+  .nova-asm {
+    width: 200px;
+    height: 70px;
+    font-size: 2rem;
+  }
+}
